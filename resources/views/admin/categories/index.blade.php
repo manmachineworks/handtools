@@ -7,7 +7,8 @@
 <body>
     <div class="container-fluid position-relative d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -23,12 +24,12 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="bg-secondary text-center rounded p-4">
+                        <div class="bg-white text-center rounded p-4 shadow-sm">
                             <div class="container">
-                                <h1>Categories</h1>
+                                <h1 class="text-primary">Categories</h1>
                                 <a href="{{ route('categories.create') }}" class="btn btn-primary">Add Category</a>
-                                <table class="table table-striped mt-3">
-                                    <thead>
+                                <table class="table table-striped table-hover mt-3">
+                                    <thead class="bg-primary text-white">
                                         <tr>
                                             <th>Name</th>
                                             <th>Actions</th>
@@ -36,17 +37,20 @@
                                     </thead>
                                     <tbody>
                                         @foreach($categories as $category)
-                                        <tr>
-                                            <td>{{ $category->name }}</td>
-                                            <td>
-                                                <a href="{{ route('categories.edit', $category) }}" class="btn btn-warning">Edit</a>
-                                                <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $category->name }}</td>
+                                                <td>
+                                                    <a href="{{ route('categories.edit', $category) }}"
+                                                        class="btn btn-warning">Edit</a>
+                                                    <form action="{{ route('categories.destroy', $category) }}"
+                                                        method="POST" style="display:inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"
+                                                            onclick="return confirm('Are you sure?')">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>

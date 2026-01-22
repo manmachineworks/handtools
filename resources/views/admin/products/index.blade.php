@@ -5,58 +5,7 @@
 
 <body>
 
-    <style>
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .dropdown-wrapper {
-                flex-direction: column;
-                align-items: flex-start !important;
-                gap: 10px;
-            }
 
-            .dropdown-wrapper select {
-                width: 100%;
-            }
-
-            .table th,
-            .table td {
-                font-size: 0.9rem;
-                white-space: nowrap;
-            }
-
-            .btn {
-                margin: 2px 0;
-            }
-        }
-
-        .action-buttons .btn-edit {
-            background-color: #ffc107;
-            color: #000;
-            border: none;
-            border-radius: 20px;
-            padding: 5px 12px;
-            transition: all 0.3s ease;
-        }
-
-        .action-buttons .btn-edit:hover {
-            background-color: #e0a800;
-            color: #fff;
-        }
-
-        .action-buttons .btn-delete {
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            padding: 5px 12px;
-            transition: all 0.3s ease;
-        }
-
-        .action-buttons .btn-delete:hover {
-            background-color: #c82333;
-            color: #fff;
-        }
-    </style>
 
 
     <div class="container-fluid position-relative d-flex p-0">
@@ -76,7 +25,7 @@
             @include('admin.include.navbar')
             <!-- Recent Sales Start -->
             <div class="container">
-                <h1>Products</h1>
+
                 <a href="{{ route('admin.add_product') }}" class="btn btn-primary mb-3">Add Product</a>
                 @if(session('success'))
                     <div class="alert alert-success">
@@ -122,17 +71,13 @@
                                 <td>{{ $product->url }}</td>
                                 <td>{{ $product->category_id }}</td>
                                 <td>{{ $product->subcategory_id }}</td>
-                                <td class="action-buttons">
-                                    <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-edit">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                                <td>
+                                    <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-warning">Edit</a>
                                     <form action="{{ route('products.destroy', $product) }}" method="POST"
-                                        class="d-inline delete-form">
+                                        class="d-inline delete-form" onsubmit="return confirmDelete()">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-delete">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                     </form>
                                 </td>
 

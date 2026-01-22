@@ -8,7 +8,8 @@
 <body>
     <div class="container-fluid position-relative d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -24,10 +25,11 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="bg-secondary text-center rounded p-4">
+                        <div class="bg-white text-center rounded p-4 shadow-sm">
                             <div class="container">
-                                <h1>Create Subcategory</h1>
-                                <form action="{{ route('subcategories.store') }}" method="POST" enctype="multipart/form-data">
+                                <h1 class="text-primary">Create Subcategory</h1>
+                                <form action="{{ route('subcategories.store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class=" form-group">
                                         <label for="name">Name</label>
@@ -36,19 +38,22 @@
                                         <input type="text" class="form-control" id="slug" name="slug" required>
                                         <div class="form-group">
                                             <label for="meta_title">Meta Title</label>
-                                            <input type="text" class="form-control" id="meta_title" name="meta_title" >
+                                            <input type="text" class="form-control" id="meta_title" name="meta_title">
                                         </div>
                                         <div class="form-group">
                                             <label for="meta_keyword">Meta Keyword</label>
-                                            <textarea class="form-control" id="meta_keyword" name="meta_keyword" ></textarea>
+                                            <textarea class="form-control" id="meta_keyword"
+                                                name="meta_keyword"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="meta_description">Meta Description</label>
-                                            <textarea class="form-control" id="meta_description" name="meta_description" ></textarea>
+                                            <textarea class="form-control" id="meta_description"
+                                                name="meta_description"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="subcat_image">Category Image</label>
-                                            <input type="file" class="form-control" id="subcat_image" name="subcat_image">
+                                            <input type="file" class="form-control" id="subcat_image"
+                                                name="subcat_image">
                                         </div>
                                         <div class="form-group mt-4">
                                             <label for="subcat_text">Categorey text</label>
@@ -60,7 +65,7 @@
                                         <select class="form-control" id="category_id" name="category_id" required>
                                             <option value="">Select Category</option>
                                             @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
