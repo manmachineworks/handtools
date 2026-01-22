@@ -1,51 +1,40 @@
 <!-- Navbar Start -->
-<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0 shadow-sm">
-    <!-- Brand (Mobile) -->
-    <a href="{{ url('/') }}" class="navbar-brand d-flex d-lg-none me-4 align-items-center">
-        <img src="/assets/new_assets/images/svg/logo.png" alt="Gurunanak Hand Tools" style="height:32px; width:auto;"
-            onerror="this.style.display='none'">
-        <span class="ms-2 fw-semibold text-black">Admin</span>
-    </a>
-
-    <!-- Sidebar Toggle -->
-    <button class="sidebar-toggler flex-shrink-0 btn btn-link  p-0" type="button" aria-label="Toggle sidebar">
-        <i class="fa fa-bars"></i>
+<nav class="navbar navbar-expand bg-transparent navbar-dark sticky-top top-bar px-4 py-2 d-flex align-items-center shadow-sm">
+    <button class="sidebar-toggler btn btn-link text-white p-0 me-3" type="button" aria-label="Toggle sidebar">
+        <i class="fas fa-bars fa-lg"></i>
     </button>
 
-    <!-- Brand (Desktop) -->
-    <a href="{{ url('/') }}" class="navbar-brand d-none d-lg-flex align-items-center ms-3">
-        <!--<img src="/assets/new_assets/images/svg/logo.png"-->
-        <!--     alt="Gurunanak Hand Tools"-->
-        <!--     style="height:34px; width:auto;"-->
-        <!--     onerror="this.style.display='none'">-->
-        <span class="ms-2 fw-semibold text-black">Gurunanak Hand Tools</span>
-    </a>
+    <div class="d-flex align-items-center gap-2 brand-pill">
+        <span class="text-uppercase fw-bold brand-tag">GHT</span>
+        <div class="flex-column">
+            <span class="fs-6 fw-semibold mb-0 text-white">Gurunanak Hand Tools</span>
+            <small class="text-muted">Admin Portal</small>
+        </div>
+    </div>
 
-
-
-    <div class="navbar-nav align-items-center ms-auto">
-        <!-- User Dropdown -->
+    <div class="ms-auto d-flex align-items-center gap-3">
+        <div class="d-none d-sm-inline text-white-50 small">Welcome back, {{ auth()->user()->name ?? 'Admin' }}</div>
         <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"
+            <a href="#" class="nav-link dropdown-toggle d-flex align-items-center gap-2 text-white py-1" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                <img class="rounded-circle me-2" src="{{ auth()->user()->avatar ?? '/assets/admin/img/user.jpg' }}"
-                    alt="Admin Profile" style="width:40px;height:40px;object-fit:cover;">
-                <span class="d-none d-lg-inline-flex text-black">
-                    {{ auth()->user()->name ?? 'Admin' }}
+                <span class="avatar rounded-circle">
+                    <img src="{{ auth()->user()->avatar ?? '/assets/admin/img/user.jpg' }}" alt="Admin profile"
+                        onerror="this.src='/assets/admin/img/user.jpg'">
                 </span>
+                <span class="d-none d-md-inline">{{ auth()->user()->name ?? 'Admin' }}</span>
             </a>
 
-            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-
-
+            <div class="dropdown-menu dropdown-menu-end rounded-3 shadow-lg border-0 p-2 bg-black">
                 <form action="{{ route('logout') }}" method="POST" class="m-0">
                     @csrf
-                    <button type="submit" class="dropdown-item">
-                        <i class="fa fa-sign-out-alt me-2 text-black"></i> Log Out
+                    <button type="submit" class="dropdown-item rounded-2 text-white">
+                        <i class="fas fa-sign-out-alt me-2 text-orange"></i>Log Out
                     </button>
                 </form>
             </div>
         </div>
     </div>
 </nav>
+
+@include('admin.include.alerts')
 <!-- Navbar End -->

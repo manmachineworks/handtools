@@ -1,146 +1,114 @@
 <!-- Sidebar Start -->
 <div class="sidebar pe-4 pb-3">
-    <nav class="navbar bg-secondary navbar-dark">
-        <div class="sidebar-header text-center py-4">
-            <a href="/"><img src="/assets/new_assets/images/svg/logo.png" alt="Gurunanak Hand Tool"
-                    class="logo-img"></a>
+    <div class="sidebar-brand px-4 py-3 d-flex align-items-center justify-content-between border-bottom border-white/10">
+        <div class="d-flex align-items-center gap-3">
+            <img src="/assets/new_assets/images/svg/logo.png" alt="Gurunanak Logo" class="sidebar-logo">
+            <div class="sidebar-brand-text">
+                <strong>Gurunanak</strong>
+                <small>Hand Tools</small>
+            </div>
         </div>
+        <span class="badge bg-orange text-uppercase small">Admin</span>
+    </div>
 
-        <div class="navbar-nav w-100">
-            <a href="/admin/dashboard" class="nav-item nav-link active"><i
-                    class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Products</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="/admin/add_product" class="dropdown-item">Add Product</a>
-                    <a href="/admin/products" class="dropdown-item">Show Products</a>
+    <nav class="sidebar-nav px-3">
+        <a href="/admin/dashboard" class="sidebar-link rounded-3 d-flex align-items-center gap-2 py-2 mb-2">
+            <i class="fas fa-tachometer-alt"></i>
+            Dashboard
+        </a>
+
+        @php
+            $menu = [
+                ['label' => 'Products', 'icon' => 'fa-laptop', 'links' => [
+                    ['href' => '/admin/add_product', 'label' => 'Add Product'],
+                    ['href' => '/admin/products', 'label' => 'Show Products'],
+                ]],
+                ['label' => 'Brands', 'icon' => 'fa-tags', 'links' => [
+                    ['href' => '/admin/brands/create', 'label' => 'Add Brand'],
+                    ['href' => '/admin/brands', 'label' => 'Show Brands'],
+                ]],
+                ['label' => 'Blogs', 'icon' => 'fa-newspaper', 'links' => [
+                    ['href' => '/admin/blogs/create', 'label' => 'Create Blogs'],
+                    ['href' => '/admin/blogs_show', 'label' => 'Show Blogs'],
+                ]],
+                ['label' => 'Categories', 'icon' => 'fa-layer-group', 'links' => [
+                    ['href' => '/admin/categories/create', 'label' => 'Create Categories'],
+                    ['href' => '/admin/categories', 'label' => 'Show Categories'],
+                ]],
+                ['label' => 'SubCategories', 'icon' => 'fa-th-list', 'links' => [
+                    ['href' => '/admin/subcategories/create', 'label' => 'Create Sub Categories'],
+                    ['href' => '/admin/subcategories', 'label' => 'Show Sub Categories'],
+                ]],
+            ];
+        @endphp
+
+        @foreach ($menu as $index => $group)
+            <div class="sidebar-group mb-2">
+                <button class="sidebar-toggle btn btn-link w-100 text-start rounded-3 d-flex align-items-center justify-content-between text-white"
+                    type="button" data-target="menu-{{ $index }}">
+                    <span class="d-flex align-items-center gap-2">
+                        <i class="fas {{ $group['icon'] }}"></i>
+                        {{ $group['label'] }}
+                    </span>
+                    <i class="fas fa-chevron-down rotate-icon"></i>
+                </button>
+                <div class="sidebar-collapse rounded-3 mt-1" id="menu-{{ $index }}">
+                    @foreach ($group['links'] as $link)
+                        <a href="{{ $link['href'] }}" class="sidebar-link submenu-link px-3 py-2 d-flex align-items-center gap-2">
+                            <i class="fas fa-circle-notch fs-6"></i>
+                            {{ $link['label'] }}
+                        </a>
+                    @endforeach
                 </div>
-                <!-- <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a> -->
             </div>
+        @endforeach
 
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-tags me-2"></i>Brands</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="/admin/brands/create" class="dropdown-item">Add Brand</a>
-                    <a href="/admin/brands" class="dropdown-item">Show Brands</a>
-                </div>
+        <a href="/admin/metas" class="sidebar-link mt-1 rounded-3 d-flex align-items-center gap-2 py-2">
+            <i class="fas fa-file-alt"></i>
+            Pages Meta
+        </a>
+
+        <a href="/admin/home/content" class="sidebar-link mt-1 rounded-3 d-flex align-items-center gap-2 py-2">
+            <i class="fas fa-home"></i>
+            Home Content
+        </a>
+
+        <div class="sidebar-group mt-2">
+            <button class="sidebar-toggle btn btn-link w-100 text-start rounded-3 d-flex align-items-center justify-content-between text-white"
+                type="button" data-target="forms">
+                <span class="d-flex align-items-center gap-2">
+                    <i class="fas fa-envelope-open-text"></i>
+                    Forms
+                </span>
+                <i class="fas fa-chevron-down rotate-icon"></i>
+            </button>
+            <div class="sidebar-collapse rounded-3 mt-1" id="forms">
+                <a href="/admin/apply" class="sidebar-link submenu-link px-3 py-2 d-flex align-items-center gap-2">
+                    <i class="fas fa-user-plus"></i>
+                    Apply Form
+                </a>
+                <a href="/admin/contact" class="sidebar-link submenu-link px-3 py-2 d-flex align-items-center gap-2">
+                    <i class="fas fa-headset"></i>
+                    Contact Form
+                </a>
             </div>
-
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Blogs</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="/admin/blogs/create" class="dropdown-item">Create Blogs</a>
-                    <a href="/admin/blogs_show" class="dropdown-item">Show Blogs</a>
-                </div>
-            </div>
-
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Categories</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="/admin/categories/create" class="dropdown-item">Create Categories</a>
-                    <a href="/admin/categories/" class="dropdown-item">Show Categories</a>
-                </div>
-            </div>
-
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>SubCategories</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="/admin/subcategories/create" class="dropdown-item">Create Sub Categories</a>
-                    <a href="/admin/subcategories" class="dropdown-item">Show Sub Categories</a>
-
-                </div>
-
-            </div>
-            <!-- <div class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Home Meta</a>
-                  <div class="dropdown-menu bg-transparent border-0">
-                      <a href="/admin/meta_update" class="dropdown-item">Meta</a>
-                  </div>
-
-              </div> -->
-
-
-            <div class="nav-item">
-                <a href="/admin/metas" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Pages Meta</a>
-            </div>
-
-            <!--  <div class="nav-item">
-                  <a href="/admin/reviews" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Reviews</a>
-              </div> -->
-
-            <!--<div class="nav-item">-->
-            <!--    <a href="/admin/users" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Users</a>-->
-            <!--</div>-->
-
-
-            <!--  <div class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Orders</a>
-                  <div class="dropdown-menu bg-transparent border-0">
-                      <a href="/admin/orders" class="dropdown-item">Orders</a>
-                      <a href="/admin/orders/canceled" class="dropdown-item">Canceled Order</a>
-                      <a href="/admin/order_pending" class="dropdown-item">Show Pending Payments</a>
-                      <a href="/admin/wishlist" class="dropdown-item">Wishlist</a>
-                  </div>
-
-              </div> -->
-
-            <!--      <div class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Coupons</a>
-                  <div class="dropdown-menu bg-transparent border-0">
-                      <a href="/admin/coupons" class="dropdown-item">Show Coupons</a>
-                      <a href="/admin/coupons/create" class="dropdown-item">Create Coupons</a>
-                  </div>
-                 
-              </div> -->
-
-
-
-
-            <div class="nav-item dropdown">
-                <a href="/admin/home/content" class="nav-link"><i class="fa fa-laptop me-2"></i>Home Content</a>
-            </div>
-            <!--
-               <div class="nav-item dropdown">
-                  <a href="/admin/contact_form" class="nav-link"><i class="fa fa-laptop me-2"></i>Contact Query</a>
-
-
-              </div> -->
-
-
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Forms</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="/admin/apply" class="dropdown-item">Apply Form</a>
-                    <a href="/admin/contact" class="dropdown-item">Contact Form</a>
-                </div>
-
-            </div>
-
         </div>
-
-
+    </nav>
 
 </div>
-
-
-
-
-</nav>
-</div>
-
-<!-- Sidebar End -->
 
 <script>
-    document.querySelectorAll('.dropdown > a').forEach(drop => {
-        drop.addEventListener('click', function (e) {
-            e.preventDefault();
-            this.parentElement.classList.toggle('active');
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.sidebar-toggle').forEach(function (toggle) {
+            toggle.addEventListener('click', function () {
+                const target = this.getAttribute('data-target');
+                const section = document.getElementById(target);
+                if (!section) {
+                    return;
+                }
+                section.classList.toggle('open');
+                this.classList.toggle('active');
+            });
         });
     });
 </script>

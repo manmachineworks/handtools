@@ -1,12 +1,12 @@
 <!-- Footer Start -->
 <div class="container-fluid pt-4 px-4">
-    <div class="bg-white rounded-top p-4 shadow-sm">
-        <div class="row">
-            <div class="col-12 col-sm-6 text-center text-sm-start">
-                &copy; <a href="/" class="text-primary">Gurunanak Hand Tools</a>, All Right Reserved.
+    <div class="footer-panel rounded-3 shadow-sm p-4 text-white border border-white/10">
+        <div class="row align-items-center gy-3">
+            <div class="col-md-6 text-center text-md-start">
+                &copy; {{ date('Y') }} <strong>Gurunanak Hand Tools</strong>. All rights reserved.
             </div>
-            <div class="col-12 col-sm-6 text-center text-sm-end">
-                Designed By <a href="/" class="text-primary">Gurunanak Hand Tools</a>
+            <div class="col-md-6 text-center text-md-end">
+                Crafted with care for industrial-grade workflows.
             </div>
         </div>
     </div>
@@ -17,7 +17,9 @@
 
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+<a href="#" class="btn btn-primary btn-lg btn-lg-square back-to-top">
+    <i class="bi bi-arrow-up"></i>
+</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
