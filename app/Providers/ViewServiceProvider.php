@@ -62,13 +62,13 @@ class ViewServiceProvider extends ServiceProvider
 
         // Detect the route and set meta data accordingly
         View::composer('*', function ($view) {
-            $meta_title = 'Mafra India | Premium Car Care Products & Accessory';
-            $meta_keywords = "Car Cleaning Products, Car Care Products, Car Wash Chemical, Car Interior Cleaning, Detailing Solutions, Car Care Accessory, Car Interior Products, cleaning foam shampoo, Car Shampoo, Car Polish, Ceramic Coating, Tyre Dressers, Clay Bar";
-            $meta_description = "Explore Mafra India's premium car care accessory range, featuring car wash chemicals, car interior cleaning, and detailing solutions. As the exclusive distributor in India";
+            $meta_title = 'Gurunanak Hand Tools | Industrial-Grade Tools for Workshops & Industries';
+            $meta_keywords = "Gurunanak Hand Tools, industrial tools India, spanners, pliers, wrenches, sockets, cutters, hammers, tool trolleys, non-sparking tools, insulated tools, stainless steel tools, welding machines, workshops India";
+            $meta_description = "Gurunanak Hand Tools delivers industrial-grade tools for workshops and industries across India. 25+ years of experience, strength and reliability, precision performance, and a full range from spanners to welding machines.";
             $averageRating = "4";
             $saleprice = "default";
             $name = "default";
-            $imageUrl = "https://www.mafraindia.com/assets/img/product/1723009666_nf2.webp";
+            $imageUrl = asset('assets/img/banner/Advanced-Polishing-img.avif');
             $segment1 = Request::segment(1);
         
             // If it's the homepage (no URL segment), fetch meta details from home_meta table where id = 1
@@ -93,10 +93,9 @@ class ViewServiceProvider extends ServiceProvider
                     $saleprice = $product->sale_price;
                     $name = $product->product_name;
                     $image = ProductImage::where('product_id', $product->id)->first();
-        
-                    if ($image) {
-                        $imageData = json_decode($image, true);
-                        $imageUrl = $imageData['image_url'] ?? $imageUrl;
+
+                    if ($image && $image->image_url) {
+                        $imageUrl = asset($image->image_url);
                     }
                 }
             } 
@@ -130,9 +129,36 @@ class ViewServiceProvider extends ServiceProvider
                     $meta_description = $subcategory->meta_description;
                 }
             }
-        
-            // Share meta data with all views
+            // For the meta manager / other slugs, try to load a page meta entry
+            elseif (Request::segment(1)) {
+                $slugMeta = Meta::where('page_slug', Request::segment(1))->first();
+                if ($slugMeta) {
+                    $meta_title = $slugMeta->title ?? $meta_title;
+                    $meta_keywords = $slugMeta->keyword ?? $meta_keywords;
+                    $meta_description = $slugMeta->description ?? $meta_description;
+                }
+            }
+
+            $baseMeta = [
+                'title' => $meta_title,
+                'keyword' => $meta_keywords,
+                'description' => $meta_description,
+                'canonical' => Request::fullUrl(),
+                'image' => $imageUrl,
+                'type' => 'website',
+                'site_name' => 'Gurunanak Hand Tools',
+            ];
+
+            $existingMeta = $view->getData()['meta'] ?? [];
+            if ($existingMeta && !is_array($existingMeta)) {
+                $existingMeta = (array) $existingMeta;
+            }
+
+            $metaForView = (object) array_merge($baseMeta, (array) $existingMeta);
+
+            // Share meta data (including normalized object) with all views
             $view->with(compact('meta_title', 'meta_keywords', 'meta_description', 'averageRating', 'name', 'saleprice', 'imageUrl'));
+            $view->with('meta', $metaForView);
         });
         
     

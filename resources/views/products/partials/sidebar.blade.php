@@ -10,7 +10,8 @@
 
         <form class="search-form modern-search" method="GET" action="{{ route('search.products') }}">
             <div class="search-input-wrap">
-                <input type="text" name="q" value="{{ request('q') }}" placeholder="Search product name…" aria-label="Search product">
+                <input type="text" name="q" value="{{ request('q') }}" placeholder="Search product name…"
+                    aria-label="Search product">
                 <button type="submit" aria-label="Search">
                     <i class="fas fa-search"></i>
                 </button>
@@ -40,8 +41,7 @@
                     @endphp
 
                     <div class="category-group {{ $shouldExpand ? 'is-open' : '' }}">
-                        <button class="category-toggle" type="button"
-                            aria-expanded="{{ $shouldExpand ? 'true' : 'false' }}"
+                        <button class="category-toggle" type="button" aria-expanded="{{ $shouldExpand ? 'true' : 'false' }}"
                             aria-controls="cat-{{ $cat->id }}">
                             <span class="cat-name" title="{{ $cat->name }}">{{ Str::limit($cat->name, 18) }}</span>
                             <span class="chev" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
@@ -56,10 +56,11 @@
                             </li>
 
                             @foreach($cat->subcategories as $sub)
-                                <li class="{{ isset($activeSubcategorySlug) && $activeSubcategorySlug === $sub->slug ? 'active' : '' }}">
+                                <li
+                                    class="{{ isset($activeSubcategorySlug) && $activeSubcategorySlug === $sub->slug ? 'active' : '' }}">
                                     <a class="subcategory-link"
-                                       data-ajax="{{ $cat->slug === ($activeCategorySlug ?? '') ? 'true' : 'false' }}"
-                                       href="{{ route('subcategory.show', [$cat->slug, $sub->slug]) }}">
+                                        data-ajax="{{ $cat->slug === ($activeCategorySlug ?? '') ? 'true' : 'false' }}"
+                                        href="{{ route('subcategory.show', [$cat->slug, $sub->slug]) }}">
                                         <span title="{{ $sub->name }}">{{ Str::limit($sub->name, 18) }}</span>
                                     </a>
                                 </li>
@@ -73,13 +74,13 @@
         @endif
     </div>
 
-    
+
     {{-- KEEP these sections as-is (no change) --}}
     <div class="ad-box">
         <img src="/assets/new_assets/images/svg/logo.png" alt="footer-logo">
         <h3 class="frist-services">Reach Out & Connect with Gurunanak</h3>
         <div class="testimonials-btn mt-0" id="ad-btn">
-            <a href="contact"  class="btn-main btn1">Contact Us
+            <a href="contact" class="btn-main btn1">Contact Us
                 <span class="arrow-section">
                     <img class="arrow" src="/assets/new_assets/images/svg/right-arrow-svg.svg" alt="right-arrow-svg">
                 </span>
@@ -87,12 +88,11 @@
                 <div class="btn-box-right btn1"></div>
             </a>
         </div>
-        <img class="plumbing-services-img5"
-             src="/assets/new_assets/images/services-page/plumbing-services-img5.png"
-             alt="plumbing-services-img5">
+        <img class="plumbing-services-img5" src="/assets/new_assets/images/services-page/plumbing-services-img5.png"
+            alt="plumbing-services-img5">
     </div>
 
-    <div class="documents-box">
+    <!-- <div class="documents-box">
         <a href="#" class="brochure-main">
             <div class="brochure">
                 <img src="/assets/new_assets/images/svg/brochure.svg" alt="brochure">
@@ -105,8 +105,6 @@
             </div>
             <h3>Download Company Profile</h3>
         </a>
-    </div>
+    </div> -->
 
 </aside>
-
-

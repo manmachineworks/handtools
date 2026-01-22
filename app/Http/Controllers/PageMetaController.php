@@ -20,8 +20,9 @@ class PageMetaController extends Controller
 
     public function store(Request $request)
     {
+        $metaTable = (new Meta())->getTable();
         $request->validate([
-            'page_slug' => 'required|unique:page_metas',
+            'page_slug' => "required|unique:{$metaTable},page_slug",
             'title' => 'nullable|string|max:255',
             'keyword' => 'nullable|string',
             'description' => 'nullable|string',
@@ -39,8 +40,9 @@ class PageMetaController extends Controller
 
     public function update(Request $request, Meta $metas)
     {
+        $metaTable = (new Meta())->getTable();
         $request->validate([
-            'page_slug' => 'required|unique:page_metas,page_slug,' . $metas->id,
+            'page_slug' => "required|unique:{$metaTable},page_slug," . $metas->id,
             'title' => 'nullable|string|max:255',
             'keyword' => 'nullable|string',
             'description' => 'nullable|string',
